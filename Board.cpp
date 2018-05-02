@@ -7,39 +7,39 @@ using namespace std;
 
 Board::Board(unsigned int rows, unsigned int columns)
 {
-	this->rows = rows;
-	this->columns = columns;
+	this-> rows = rows;
+    this-> columns = columns;
 
 }
 
 void Board::make()
 {
 
-	xy.resize(rows, vector<char>(columns, '.'));
+	xy.resize(rows, vector<char> (columns, '.'));
 
 }
 
 void Board::show()
 {
 	cout << "   ";
-	for (unsigned int i = 97; i < 97 + columns; i++)
-	{
-		cout << char(i) << ' ';
-	}
+    for (unsigned int i = 97; i < 97 + columns; i++)
+    {
+        cout << char(i) << ' ';
+    }
 
-	cout << endl;
+    cout << endl;
 
 	for (unsigned int k = 0; k < rows; k++)
 	{
-		cout << char(k + 65) << ' ';
+            cout << char(k + 65) << ' ';
 
-		for (unsigned int j = 0; j < columns; j++)
-		{
-			cout << ' ' << xy[k][j];
-		}
-
+            for (unsigned int j = 0; j < columns; j++)
+            {
+                cout << ' ' << xy.at(k).at(j);
+            }
+       
 		cout << ' ' << endl;
-	}
+	}   		
 }
 
 void Board::insert(string position, string word)
@@ -55,7 +55,7 @@ void Board::insert(string position, string word)
 
 	/////create function just for this
 	//verify size
-	if ((((int)upperCase + word.length()) > (65 + rows)) && (((int)lowerCase + word.length()) > (97 + columns)))
+	if ( (((int)upperCase + word.length()) > (65 + rows)) && (((int)lowerCase + word.length()) > (97 + columns)))
 	{
 		cerr << "That word does not fit in the place you want. Try again!" << endl << endl;
 		exit(1);
@@ -67,14 +67,14 @@ void Board::insert(string position, string word)
 		{
 			for (unsigned int i = uC, k = 0, j = lC; k < word.length(); i++, k++)
 			{
-				xy.at(i).at(j) = toupper(word.at(k)); //capitalizes the string
+				xy.at(i).at(j) = word.at(k);
 			}
 		}
 		else
 		{
 			for (unsigned int i = uC, k = 0, j = lC; k < word.length(); j++, k++)
 			{
-				xy.at(i).at(j) = toupper(word.at(k)); //capitalizes the string
+				xy.at(i).at(j) = word.at(k);
 			}
 		}
 	}
@@ -99,14 +99,14 @@ bool Board::usedword(string word)
 	return notPresent;
 }
 
-/*
-void Board::occupied(string position, string word)
+/*void Board::occupied(string position, string word)
 {
 	char last = position.at(position.length() - 1);
 	string coordenates = position.erase(position.size() - 1, 1);
 	vector<string> aux;
 	int counter = 0;
 	string savepos;
+	bool equal;
 
 	while (counter != word.size())
 	{
@@ -127,5 +127,68 @@ void Board::occupied(string position, string word)
 
 		counter++
 	}
+
+	for (unsigned int i = 0; i < aux.size(); i++)
+	{
+		for (unsigned int j = 0; j < positionvec.size(); j++)
+		{
+			if (aux.at(i) == positionvec.at(j))
+			{
+				if (xy.at(((int)aux.at(i).at(0)) - 'A'), (((int)aux.at(i).at(1)) - 'a') == word.at(i))
+				{
+
+					break;
+				}
+			}
+
+		}
+
+	}
 }
 */
+string Board::changeDot(string position)
+{
+	string line;
+	char last = position.at(position.length() - 1);
+	int j;
+	if (last == 'H')
+	{
+		for (unsigned int i = ((int)position.at(1) - 'a'); i < (columns - ((int)position.at(1) - 'a')); i++)
+		{
+
+			j = (int)position.at(0) - 'A';
+
+			if (xy.at(j).at(i) = '.')
+			{
+				line = line + '?';
+			}
+			else
+			{
+				line = line + xy.at(j).at(i);
+			}
+
+		}
+    }
+
+	if (last == 'V')
+	{
+		for (unsigned int i = 0; i < (rows - (int)position.at(0) - 'A'); i++)
+		{
+			j = (int)position.at(1) - 'a';
+
+			if (xy.at(j).at(i) = '.')
+			{
+				line = line + '?';
+			}
+			else
+			{
+				line = line + xy.at(j).at(i);
+			}
+		}
+	}
+	cout << line;
+	d->wildcardMatch(line,)
+	return line;
+
+}
+

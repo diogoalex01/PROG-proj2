@@ -10,9 +10,9 @@ int main()
 {
 	//variables
 	string thesaurusFile, //file that contains the dictionary
-						  //wordFile; //file that will store the processed word list
-		position, //position of the word
-		word; //word to insert
+		   //wordFile; //file that will store the processed word list
+		   position, //position of the word
+		   word; //word to insert
 	int rows, columns, option;
 
 	//INTERFACE
@@ -32,9 +32,9 @@ int main()
 	cin >> option;
 
 	cout << endl
-		<< "-------------------------" << endl
-		<< "CREATE PUZZLE" << endl
-		<< "-------------------------" << endl;
+		 << "-------------------------" << endl
+		 << "CREATE PUZZLE" << endl
+		 << "-------------------------" << endl;
 
 	//-----------------------------------------------------------------
 	//END of INTERFACE
@@ -51,51 +51,35 @@ int main()
 	//OPTION 1
 	//-----------------------------------------------------------------
 	Board brd(rows, columns);
+	brd.d = &dict;
 	brd.make();
-
-	cout << endl;
-	cout << endl;
-
 	brd.show();
 
-	//temporario!!!!!!!!!!!!!!
-	while (word != "idk")
+	cout << "Position ( RCD / CTRL-Z = stop ) ? ";
+	cin >> position;
+	//+3 letras, erro
+	//ordem MmV
+
+	cout << endl;
+	brd.changeDot(position);
+	cout << "Word ( - = remove / ? = help ) ? ";
+	cin >> word;
+	//brd.occupied(position, word);
+	//checks whether the chosen word is valid
+	if (!dict.isValid(word))
 	{
-		cout << endl << "Position ( RCD / CTRL-Z = stop ) ? ";
-		cin >> position;
-		//+3 letras, erro
-		//ordem MmV
-
+		cerr << "Invalid word. Try again!" << endl << endl;
+		exit(1);
+	}
+	else
+	{
+		if (brd.usedword(word))
+		{
+			brd.insert(position, word);
+		}
+		
 		cout << endl;
-
-		cout << "Word ( - = remove / ? = help ) ? ";
-		cin >> word;
-		//finishes
-		if (word == "idk")
-		{
-			cout << "GOOD GAME!" << endl << endl;
-			break;
-		}
-		else
-		{
-			//brd.occupied(position, word);
-			//checks whether the chosen word is valid
-			if (!dict.isValid(word))
-			{
-				cerr << "Invalid word. Try again!" << endl << endl;
-				exit(1);
-			}
-			else
-			{
-				if (brd.usedword(word))
-				{
-					brd.insert(position, word);
-				}
-
-				cout << endl;
-				brd.show();
-			}
-		}
+		brd.show();
 	}
 
 	//-----------------------------------------------------------------
@@ -108,6 +92,7 @@ int main()
 cwcreator
 main.cpp
 Extraction of a word list from a synonym dictionary
+
 @author Diogo & Mafalda
 @version 1.0 29/04/2018
 */
