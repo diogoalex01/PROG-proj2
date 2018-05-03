@@ -55,10 +55,23 @@ int main()
 	brd.make();
 	brd.show();
 
-	cout << "Position ( RCD / CTRL-Z = stop ) ? ";
-	cin >> position;
-	//+3 letras, erro
-	//ordem MmV
+		//temporario!!!!!!!!!!!!!!
+	while (word != "idk")
+	{
+		cout << endl << "Position ( RCD / CTRL-Z = stop ) ? ";
+		cin >> position;
+		//+3 letras, erro
+		//ordem MmV
+ 
+		cout << "Word ( - = remove / ? = help ) ? ";
+		cin >> word;
+		//finishes
+		if (word == "idk")
+		{
+			cout << "GOOD GAME!" << endl << endl;
+			break;
+		}
+		else
 
 	cout << endl;
 	brd.changeDot(position);
