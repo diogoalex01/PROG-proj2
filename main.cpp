@@ -10,9 +10,11 @@ int main()
 {
 	//variables
 	string thesaurusFile, //file that contains the dictionary
-	       position, //position of the word
-		   word; //word to insert
+						  //wordFile; //file that will store the processed word list
+		position, //position of the word
+		word; //word to insert
 	int rows, columns, option;
+	string line;
 
 	//INTERFACE
 	//-----------------------------------------------------------------
@@ -73,8 +75,6 @@ int main()
 		if (word == "idk")
 		{
 			cout << "GOOD GAME!" << endl << endl;
-
-			brd.saveFile(thesaurusFile);
 			break;
 		}
 		else
@@ -90,8 +90,14 @@ int main()
 			{
 				if (brd.notUsedWord(word))
 				{
-					brd.insert(position, word);
-					brd.track(position, word);
+					line = brd.changeDot(position, word);
+
+					if (dict.wildcardMatch(line.c_str(), word.c_str()))
+					{
+
+						brd.insert(position, word);
+					}
+
 				}
 
 				cout << endl;
