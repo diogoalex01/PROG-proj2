@@ -4,7 +4,6 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
-#include <string>
 
 using namespace std;
 
@@ -12,10 +11,11 @@ class Player
 {
 public:
 	Player(string name);
-	string getTime(int initialTime, int finishTime);
-	void saveFile(string savedFile, string elapsedTime, int tipAmount);
+	double getTime(int initialTime, int finishTime);
 private:
 	string playerName;
-	int time;
+	int //initialTime,
+		  // finishTime,
+		   elapsedTime;
 };
 #endif
