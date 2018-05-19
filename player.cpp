@@ -1,7 +1,6 @@
 #include "player.h"
 
 using namespace std;
-ofstream fout;
 
 Player::Player(string name)
 {
@@ -9,45 +8,29 @@ Player::Player(string name)
 }
 
 //determines the time it took the player to finish the board
-string Player::getTime(int initialTime, int finishTime)
+double Player::getTime(int initialTime, int finishTime)
 {
-	this->time;
-	string elapsedTime;
+	this->elapsedTime;
 
+	// declare variables
 	int hour = 0,
 		min = 0,
 		sec = 0;
 
-	time = finishTime - initialTime;
+	elapsedTime = finishTime - initialTime;
 
-	//converting time to HH:MM:SS
-	hour = time / 3600;
-	time = time % 3600;
-	min = time / 60;
-	time = time % 60;
-	sec = time;
+	// using the time from ^ above, convert 
+	// secs to HH:MM:SS format using division
+	// and modulus
+	hour = elapsedTime / 3600;
+	elapsedTime = elapsedTime % 3600;
+	min = elapsedTime / 60;
+	elapsedTime = elapsedTime % 60;
+	sec = elapsedTime;
 
-	// display data to user///////////
-	elapsedTime = "Solved in: " + to_string(hour) + " hours, " + to_string(min) + " minutes and " + to_string(sec) + " seconds!";
+	// display data to user
+	cout << endl << "The player took: " << hour << " hours, "
+		         << min << " minutes, and " << sec << " seconds!" << endl << endl;
 	
 	return elapsedTime;
-}
-
-//saves the statistics
-void Player::saveFile(string savedFile, string elapsedTime, int tipAmount)
-{
-	string fileName,
-		   next;
-
-	//saves with the correct name format
-	fileName = savedFile.insert(4, "_p");
-
-	//opens the file that will will be written
-	fout.open(fileName, std::ofstream::out | std::ofstream::app);
-
-	fout << "Player: " + playerName << ". " << elapsedTime << " Used " << tipAmount << " tips to complete the board." << endl << endl;
-
-	fout.close();
-
-	cout << " Stats of the game saved to file: " << fileName << endl << endl;
 }
